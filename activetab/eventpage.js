@@ -1,12 +1,16 @@
 /* global chrome */
 
 chrome.runtime.onMessage.addListener(function (message, sender, respond) {
-  if (message == 'inject') {
+  if (message.side == 'inject') {
     chrome.tabs.executeScript({
       code: 'document.body.textContent.trim().slice(0,16)'
     }, function (result) {
-      if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
-      else respond(result);
+      chrome.runtime.sendMessage({
+        side: 'response',
+        success: !chrome.runtime.lastError,
+        result: chrome.runtime.lastError ?
+          chrome.runtime.lastError.message : result
+      });
     });
   }
 });
