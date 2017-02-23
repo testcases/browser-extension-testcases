@@ -8,11 +8,6 @@
     "default_popup": "popup.html"
   },
   "author": "Stuart P. Bentley",
-  "background": {
-    "scripts": ["eventpage.js"],
-    "persistent": false
-  },
-  "incognito": "split",
   "permissions": [
     "activeTab"
   ]
